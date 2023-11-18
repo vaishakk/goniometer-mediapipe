@@ -1,2 +1,41 @@
 def poselandmarkerresult2dict(result) -> dict:
-    pass
+   posedict = {}
+   landmark_names = [
+        'nose', 
+        'left eye (inner)', 
+        'left eye', 
+        'left eye (outer)', 
+        'right eye (inner)', 
+        'right eye', 
+        'right eye (outer)',
+        'left ear',
+        'right ear',
+        'mouth (left)',
+        'mouth (right)',
+        'left shoulder',
+        'right shoulder',
+        'left elbow',
+        'right elbow',
+        'left wrist',
+        'right wrist',
+        'left pinky',
+        'right pinky',
+        'left index',
+        'right index',
+        'left thumb',
+        'right thumb',
+        'left hip',
+        'right hip',
+        'left knee',
+        'right knee',
+        'left ankle',
+        'right ankle',
+        'left heel',
+        'right heel',
+        'left foot index',
+        'right foot index'
+        ]
+   landmark_list = result.pose_landmarks[0]
+   for idx, landmark in enumerate(landmark_list):
+      posedict[landmark_names[idx]] = (landmark_list[idx].x, landmark_list[idx].y)
+   return posedict

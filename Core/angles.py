@@ -6,15 +6,12 @@ class Angles:
         'kneeRight',
         'shoulderLeft',
         'shoulderRight',
-        'torso',
         'ankleLeft',
         'ankleRight',
         'hipLeft',
         'hipRight',
         'wristLeft',
-        'wristRight',
-        'neck',
-        'stick'
+        'wristRight'
     ]
 
     def __init__(self) -> None:
