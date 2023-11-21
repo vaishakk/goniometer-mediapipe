@@ -21,7 +21,11 @@ def upload():
         cv2.imwrite('cv2.jpg', data)
         posecalculator = MediaPipePoseCalculator()
         angles = AngleCalculatorFromNPArray(data, posecalculator).calculateangle()
-        print(angles)
-        return json.dumps(angles)
+        #print(angles.angles)
+        return json.dumps({
+            'angles': angles.angles,
+            'image': cv2.imencode('.jpg', angles.annotated_image)[1].tolist()
+        })
+        #return json.dumps(angles)
     except Exception as err:
         return 'OpenCV error: ' + str(err)

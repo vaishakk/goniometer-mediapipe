@@ -45,4 +45,4 @@ def getmediapipeposes(data: np.array):
         pose_landmarker_result = landmarker.detect(image)
         annotated_image = draw_landmarks_on_image(image.numpy_view(), pose_landmarker_result)
         cv2.imwrite('annotated.jpg', annotated_image)
-    return pose_landmarker_result
+    return pose_landmarker_result, annotated_image
