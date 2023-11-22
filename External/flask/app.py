@@ -8,7 +8,7 @@ import json
 import numpy as np
 
 app = Flask(__name__)
-@app.route('/upload', methods=['POST'])
+@app.route('/upload/file', methods=['POST'])
 def upload():
     file_bytes = None
     try:
@@ -17,15 +17,24 @@ def upload():
     except Exception as err:
         return 'Read error: ' + str(err)
     try:
-        data = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR) 
-        cv2.imwrite('cv2.jpg', data)
-        posecalculator = MediaPipePoseCalculator()
-        angles = AngleCalculatorFromNPArray(data, posecalculator).calculateangle()
-        #print(angles.angles)
-        return json.dumps({
-            'angles': angles.angles,
-            'image': cv2.imencode('.jpg', angles.annotated_image)[1].tolist()
-        })
-        #return json.dumps(angles)
+        return process_frame(file_bytes)
     except Exception as err:
         return 'OpenCV error: ' + str(err)
+    
+@app.route('/upload/bytes', methods=['POST'])
+def upload_bytes():
+    image_bytes = bytes(flask.request.get_json()['imagebytes'])
+    image_np = np.fromstring(image_bytes, np.uint8)
+    return process_frame(image_np)
+
+def process_frame(frame):
+    data = cv2.imdecode(frame, cv2.IMREAD_COLOR) 
+    cv2.imwrite('cv2.jpg', data)
+    posecalculator = MediaPipePoseCalculator()
+    angles = AngleCalculatorFromNPArray(data, posecalculator).calculateangle()
+    #print(angles.angles)
+    return json.dumps({
+        'angles': angles.angles,
+        'image': cv2.imencode('.jpg', angles.annotated_image)[1].tolist()
+    })
+    #return json.dumps(angles)

@@ -35,7 +35,9 @@ def poselandmarkerresult2dict(result) -> dict:
         'left foot index',
         'right foot index'
         ]
-   landmark_list = result.pose_landmarks[0]
-   for idx, landmark in enumerate(landmark_list):
-      posedict[landmark_names[idx]] = (landmark_list[idx].x, landmark_list[idx].y)
-   return posedict
+   if len(result.pose_landmarks):
+      landmark_list = result.pose_landmarks[0]
+      for idx, landmark in enumerate(landmark_list):
+         posedict[landmark_names[idx]] = (landmark_list[idx].x, landmark_list[idx].y)
+      return posedict
+   return {}

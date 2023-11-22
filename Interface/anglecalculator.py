@@ -32,5 +32,7 @@ class AngleCalculatorFromNPArray:
 
     def calculateangle(self) -> AngleOutput:
         poses = self.posecalculator.calculate33posefromnp(self._frame)
-        anglesobj = self.calculator.calculateangles(dict2landmarks(poses.poses))
-        return AngleOutput(angles2dict(anglesobj), poses.annotated_image)
+        if poses.poses:
+            anglesobj = self.calculator.calculateangles(dict2landmarks(poses.poses))
+            return AngleOutput(angles2dict(anglesobj), poses.annotated_image)
+        return AngleOutput({}, poses.annotated_image)
