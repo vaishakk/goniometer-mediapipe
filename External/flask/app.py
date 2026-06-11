@@ -1,7 +1,6 @@
-from flask import Flask, render_template, Response, request
+from flask import Flask
 import flask
 import cv2
-import threading
 from External.mediapipeposecalculator import MediaPipePoseCalculator
 from Interface.anglecalculator import AngleCalculatorFromNPArray
 import json
@@ -28,13 +27,10 @@ def upload_bytes():
     return process_frame(image_np)
 
 def process_frame(frame):
-    data = cv2.imdecode(frame, cv2.IMREAD_COLOR) 
-    cv2.imwrite('cv2.jpg', data)
+    data = cv2.imdecode(frame, cv2.IMREAD_COLOR)
     posecalculator = MediaPipePoseCalculator()
     angles = AngleCalculatorFromNPArray(data, posecalculator).calculateangle()
-    #print(angles.angles)
     return json.dumps({
         'angles': angles.angles,
         'image': cv2.imencode('.jpg', angles.annotated_image)[1].tolist()
     })
-    #return json.dumps(angles)

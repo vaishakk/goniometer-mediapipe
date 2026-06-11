@@ -1,9 +1,7 @@
 import mediapipe as mp
 from mediapipe.tasks import python
-from mediapipe.tasks.python import vision
 from mediapipe import solutions
 from mediapipe.framework.formats import landmark_pb2
-import cv2
 import numpy as np
 import os
 
@@ -45,5 +43,4 @@ def getmediapipeposes(data: np.array):
     with PoseLandmarker.create_from_options(options) as landmarker:
         pose_landmarker_result = landmarker.detect(image)
         annotated_image = draw_landmarks_on_image(image.numpy_view(), pose_landmarker_result)
-        #cv2.imwrite('annotated.jpg', annotated_image)
     return pose_landmarker_result, annotated_image

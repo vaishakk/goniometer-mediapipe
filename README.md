@@ -17,7 +17,7 @@ Toolkit for estimating human joint angles from Mediapipe pose detections. The pr
 ## Installation
 1. Clone the repository and create a virtual environment:
    ```bash
-   git clone https://github.com/<your-org>/Goniometer-Mediapipe.git
+   git clone https://github.com/vaishakk/Goniometer-Mediapipe.git
    cd Goniometer-Mediapipe
    python3.10 -m venv .venv
    source .venv/bin/activate
@@ -26,7 +26,7 @@ Toolkit for estimating human joint angles from Mediapipe pose detections. The pr
    ```bash
    pip install -r requirements.txt
    ```
-3. Verify that `External/pose_landmarker_full.task` exists and adjust the path in `External/mediapipepose.py` if you keep the model elsewhere (the current code expects an absolute path).
+3. Verify that `External/pose_landmarker_full.task` exists.
 
 ## Usage
 ### Angle calculator from NumPy frames
