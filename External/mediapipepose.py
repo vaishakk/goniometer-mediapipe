@@ -5,6 +5,7 @@ from mediapipe import solutions
 from mediapipe.framework.formats import landmark_pb2
 import cv2
 import numpy as np
+import os
 
 def draw_landmarks_on_image(rgb_image, detection_result):
   pose_landmarks_list = detection_result.pose_landmarks
@@ -27,8 +28,8 @@ def draw_landmarks_on_image(rgb_image, detection_result):
   return annotated_image
 
 def getmediapipeposes(data: np.array):
-
-    model_path = '/home/ubuntu/Goniometer-Mediapipe/External/pose_landmarker_full.task'
+    ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+    model_path = os.path.join(ROOT_DIR, 'pose_landmarker_full.task')
 
     BaseOptions = mp.tasks.BaseOptions
     PoseLandmarker = mp.tasks.vision.PoseLandmarker
