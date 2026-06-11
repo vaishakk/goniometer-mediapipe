@@ -1,4 +1,4 @@
-# Goniometer Mediapipe
+# Python Goniometer using Mediapipe
 
 Toolkit for estimating human joint angles from Mediapipe pose detections. The project combines Google Mediapipe pose landmark models with a small, test-driven Python architecture that exposes reusable building blocks and a minimal Flask service for serving joint-angle measurements.
 
