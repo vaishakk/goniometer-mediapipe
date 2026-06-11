@@ -76,6 +76,5 @@ pytest
 - Format code with standard Python style (`black` or `ruff` are good options) and run `pytest` before submitting a pull request.
 
 ## Roadmap & Known Issues
-- `External/mediapipepose.py` currently hard-codes an absolute path to the `.task` model file—consider making it configurable via environment variable or CLI argument.
 - The Flask service writes diagnostic files (`cv2.jpg`) when processing uploads; replace with structured logging for production use.
 
